@@ -33,11 +33,18 @@
                 <span class="category">
                     @course.Category.Name
                 </span>
+                <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
             </div>
         </li>
 
     }
 </ul>
+@section scripts 
+{
+    <script>
+
+    </script>
+}
 
 <div class="jumbotron">
     <h1>ASP.NET</h1>
