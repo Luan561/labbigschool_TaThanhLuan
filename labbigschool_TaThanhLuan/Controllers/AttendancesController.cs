@@ -1,4 +1,5 @@
-﻿using labbigschool_TaThanhLuan.Models;
+﻿using labbigschool_TaThanhLuan.DTOs;
+using labbigschool_TaThanhLuan.Models;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -18,16 +19,16 @@ namespace labbigschool_TaThanhLuan.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Attend([FromBody] int courseId)
+        public IHttpActionResult Attend(AttendanceDto attendanceDto)
         {
             var userId = User.Identity.GetUserId();
-            if (_dbConText.Attendances.Any(a => a.AttendeeId == userId && a.CourseId == courseId))
+            if (_dbConText.Attendances.Any(a => a.AttendeeId == userId && a.CourseId == attendanceDto.CourseId))
                 return BadRequest("The Attendance already existsl");
             var attendance = new Attendance
             {
-                CourseId = courseId,
+                CourseId = attendanceDto.CourseId,
                 AttendeeId = userId
-            };
+            }; 
 
             _dbConText.Attendances.Add(attendance);
             _dbConText.SaveChanges();
